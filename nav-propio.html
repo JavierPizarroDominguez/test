@@ -1,0 +1,158 @@
+<style>
+	/* General */
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		font-size: 1rem;
+		font-family:
+			"Segoe UI",
+			"Roboto",
+			"Helvetica Neue",
+			"Helvetica",
+			"Arial",
+			sans-serif;
+	}
+
+	/* MENU DE NAVEGACION */
+	#menu-fixed {
+		position: fixed;
+		width: 100%;
+		height: 5rem;
+		background: #0F0F1A;
+		color: white;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0 1rem;
+	}
+
+	.marca {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.marca img {
+		height: 100%;
+		width: auto;
+	}
+
+	.marca span {
+		font-size: 1.6rem;
+		font-weight: 700;
+		text-transform: uppercase;
+	}
+
+	#menu-fixed ul {
+		list-style: none;
+		display: flex;
+		gap: 2rem;
+		align-items: center;
+	}
+
+	#menu-fixed a {
+		text-decoration: none;
+		color: white;
+
+	}
+
+	#menu-fixed a:hover {
+		color: #e5532d;
+	}
+
+	#menu-fixed nav ul li {
+		position: relative;
+		/*Cada item del menu principales referencia para su submenu */
+	}
+
+	.submenu {
+		visibility: hidden;
+		position: absolute;
+		top: 100%;
+		left: 0;
+		background: #0D1B2A;
+		opacity: 0.9;
+		flex-direction: column;
+		border-radius: 0 0 5px 5px;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+		width: 150%;
+		gap: 1rem;
+		padding-bottom: 1rem;
+		padding-top: 1rem;
+	}
+
+	nav ul li:hover>ul,
+	nav ul li:focus-within>ul {
+		visibility: visible;
+		animation: fadeIn 0.2s ease-in-out;
+	}
+
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+			transform: translateY(-10px);
+		}
+
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.sub-submenu {
+		visibility: hidden;
+	}
+</style>
+
+<header id="menu-fixed">
+	<div class="marca">
+		<img src="logo-chico.svg" aria-hidden="true">
+		<span>Dominguez y Pizarro</span>
+	</div>
+	<nav>
+		<ul>
+			<li><a href="#">Inicio</a></li>
+			<li>
+				<a href="#">Propiedades en venta</a>
+				<ul class="submenu">
+					<li><a href="#">Todas las propiedades en venta</a></li>
+					<li>
+						<a href="#">Filtrar por comunas</a>
+						<ul class="sub-submenu">
+							<li><a href="#">Santo Domingo</a></li>
+							<li><a href="#">San Antonio</a></li>
+							<li><a href="#">Cartagena</a></li>
+							<li><a href="#">El Tabo</a></li>
+							<li><a href="#">El Quisco</a></li>
+						</ul>
+					</li>
+					<li><a href="#">Casas en venta</a></li>
+					<li><a href="#">Departamentos en venta</a></li>
+					<li><a href="#">Parcelas en venta</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#">Propiedades en arriendo</a>
+				<ul class="submenu">
+					<li><a href="#">Todas las propiedades en arriendo</a></li>
+					<li>
+						<span>Filtrar por comunas</span>
+						<ul class="sub-submenu">
+							<li><a href="#">Propiedades en Santo Domingo</a></li>
+							<li><a href="#">Propiedades en San Antonio</a></li>
+							<li><a href="#">Propiedades en Cartagena</a></li>
+							<li><a href="#">Propiedades en El Tabo</a></li>
+							<li><a href="#">Propiedades en El Quisco</a></li>
+						</ul>
+					</li>
+					<li><a href="#">Casas en venta</a></li>
+					<li><a href="#">Departamentos en venta</a></li>
+					<li><a href="#">Parcelas en venta</a></li>
+				</ul>
+			</li>
+			<li><a href="#">Administración de propiedades</a></li>
+			<li><a href="#">Contáctanos</a></li>
+		</ul>
+	</nav>
+</header>
