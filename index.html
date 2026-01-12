@@ -1,158 +1,799 @@
 <style>
-	/* General */
-	* {
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-		font-size: 1rem;
-		font-family:
-			"Segoe UI",
-			"Roboto",
-			"Helvetica Neue",
-			"Helvetica",
-			"Arial",
-			sans-serif;
-	}
+    /* VARIABLES */
+    :root {
+        --altura-navbar: 5rem;
+        --altura-seccion: calc(100vh - 5rem);
+        --color-navbar: #10192d;
+        --color-submenu: #0F0F1A;
+        --color-blanco: #E9E9E9;
+        --color-primario: #e5532d;
+        --color-secundario: #faa307;
+        --duracion-animacion: 4s;
+        --gradiente-naranja: radial-gradient(circle at 50% -30vh, #ffd687 0, #fc5243 50vh, #9d2f6a 90vh, rgba(32, 31, 66, 0) 150vh);
+        --gradiente-rosada: radial-gradient(circle at 50% 40vh, #ffd27b 0, #df3a93 60vh, #5c1663 100vh);
+        --gradiente-amarillo-ampolleta: radial-gradient(circle at 50% 20%,
+                #fff4c2 0%,
+                #ffe08a 25%,
+                #ffc857 45%,
+                rgba(255, 200, 87, 0.4) 65%,
+                rgba(255, 200, 87, 0) 80%);
 
-	/* MENU DE NAVEGACION */
-	#menu-fixed {
-		position: fixed;
-		width: 100%;
-		height: 5rem;
-		background: #0F0F1A;
-		color: white;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		padding: 0 1rem;
-	}
+        --gradiente-amarillo-sodio: radial-gradient(circle at 50% 10%,
+                #fff1b8 0%,
+                #ffd166 30%,
+                #ffb703 55%,
+                rgba(255, 183, 3, 0.4) 75%,
+                rgba(255, 183, 3, 0) 90%);
+        --gradiente-amarillo-tungsteno: radial-gradient(circle at 50% 15%,
+                #ffb870 0%,
+                /* Empieza directamente con dorado */
+                #e89c45 30%,
+                #d68539 60%,
+                #c47833 100%);
+        /* ← Mantiene el color sólido hasta el final */
 
-	.marca {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-	}
 
-	.marca img {
-		height: 100%;
-		width: auto;
-	}
 
-	.marca span {
-		font-size: 1.6rem;
-		font-weight: 700;
-		text-transform: uppercase;
-	}
 
-	#menu-fixed ul {
-		list-style: none;
-		display: flex;
-		gap: 2rem;
-		align-items: center;
-	}
 
-	#menu-fixed a {
-		text-decoration: none;
-		color: white;
+        --gradiente-1: radial-gradient(circle at 50% 145.586vh, rgb(255, 210, 123) 0vh, rgb(224, 59, 145) 50vh, rgb(94, 23, 99) 90vh, rgba(32, 31, 66, 0) 101.226vh);
+        --gradiente-2: radial-gradient(circle at 50% -30vh, #ffd687 0, #fc5243 50vh, #9d2f6a 90vh, rgba(32, 31, 66, 0) 150vh);
+        --gradiente-3: linear-gradient(223.17deg, #1c1829, #1b1828 8.61%, #191724 17.21%, #161520 25.82%, #14131c 34.42%, #121218 43.03%, #111117 51.63%);
+        --gradiente-4: linear-gradient(223.17deg, #237287, #246c84 8.61%, #265f7c 17.21%, #274f72 25.82%, #284367 34.42%, #283a5f 43.03%, #28375c 51.63%);
+        --gradiente-5: linear-gradient(223.17deg, #8c7bc8, #8a77c2 8.61%, #866db2 17.21%, #7e619f 25.82%, #75548b 34.42%, #6d4b7b 43.03%, #694775 51.63%);
+        --gradiente-6: linear-gradient(223.17deg, #c36267, #bd5f68 8.61%, #ae586a 17.21%, #9b4e69 25.82%, #874466 34.42%, #783d61 43.03%, #723a5f 51.63%);
+        --gradiente-7: linear-gradient(223.17deg, #545b75, #515872 8.61%, #4a526c 17.21%, #424964 25.82%, #3a415c 34.42%, #343b56 43.03%, #323953 51.63%);
+        --gradiente-8: linear-gradient(223.17deg, #515d47, #4e5b45 8.61%, #45563f 17.21%, #3a5039 25.82%, #324936 34.42%, #2e4435 43.03%, #2c4234 51.63%);
 
-	}
+    }
 
-	#menu-fixed a:hover {
-		color: #e5532d;
-	}
+    /* GENERAL */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family:
+            "Segoe UI",
+            "Roboto",
+            "Helvetica Neue",
+            "Helvetica",
+            "Arial",
+            sans-serif;
+    }
 
-	#menu-fixed nav ul li {
-		position: relative;
-		/*Cada item del menu principales referencia para su submenu */
-	}
+    html,
+    body {
+        height: 100%;
+        overflow: hidden;
+        /* body nunca scrollea */
+    }
 
-	.submenu {
-		visibility: hidden;
-		position: absolute;
-		top: 100%;
-		left: 0;
-		background: #0D1B2A;
-		opacity: 0.9;
-		flex-direction: column;
-		border-radius: 0 0 5px 5px;
-		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-		width: 150%;
-		gap: 1rem;
-		padding-bottom: 1rem;
-		padding-top: 1rem;
-	}
+    ul {
+        list-style: none;
+    }
 
-	nav ul li:hover>ul,
-	nav ul li:focus-within>ul {
-		visibility: visible;
-		animation: fadeIn 0.2s ease-in-out;
-	}
+    a {
+        text-decoration: none;
+    }
 
-	@keyframes fadeIn {
-		from {
-			opacity: 0;
-			transform: translateY(-10px);
-		}
+    /* LAYOUT 1: Menu Fixed */
+    #menu-fixed {
+        width: 100%;
+        height: var(--altura-navbar);
+        padding: 1rem 1rem 1rem 0.5rem;
+        background-color: var(--color-navbar);
+        color: var(--color-blanco);
 
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
-	.sub-submenu {
-		visibility: hidden;
-	}
+        position: fixed;
+        z-index: 2;
+        /*Encima del Hero, Debajo del Menú */
+    }
+
+    /* COMPONENTE 1: MARCA */
+    .marca {
+        display: flex;
+        align-items: center;
+    }
+
+    /*SUB-COMPONENTES */
+    .marca span {
+        font-size: 1.6rem;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    .marca img {
+        height: 100%;
+        width: auto;
+    }
+
+    /* COMPONENTE 2: BOTON MENU */
+    #menu-fixed .boton-menu {
+        border: var(--color-blanco) 1px solid;
+        padding: 0.5rem;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    /* El menu se controlar por un check que no se muestra directamente */
+    #check-menu {
+        display: none;
+    }
+
+    /* El contenido del botón se modifica según  el check */
+    #menu-fixed .boton-menu::after {
+        content: '☰ Menu';
+    }
+
+    #check-menu:checked~#menu-fixed .boton-menu::after {
+        content: "✖";
+    }
+
+    /* Cuando está activo el menú, se bloquea el scroll del contenido */
+    #check-menu:checked~main {
+        overflow-y: hidden;
+    }
+
+    /* LAYOUT 2: MENU PRINCIPAL */
+
+    /*El menu de navegación está oculto por defecto */
+    #menu-principal {
+        display: none;
+    }
+
+    /* Al ser activado el check, muestra el menu principal */
+    #check-menu:checked~#menu-principal {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        background: var(--color-submenu);
+        width: 90%;
+        padding: 2rem;
+
+        position: fixed;
+        top: 5rem;
+        /* Debajo del header */
+        right: 0;
+        /* Alineado a la derecha */
+        z-index: 3;
+        /* Encima del menu-fixed */
+    }
+
+    /* Distancia entre links */
+    #menu-principal ul li {
+        margin-top: 0.5rem;
+    }
+
+    #menu-principal a {
+        color: var(--color-blanco);
+        font-size: 2.1rem;
+        font-weight: 900;
+        text-transform: uppercase;
+    }
+
+    /* MAIN */
+    main {
+        background: var(--color-submenu);
+
+        /* Deja el espacio del navbar antes de mostrar contenido */
+        padding-top: var(--altura-navbar);
+
+        z-index: 10;
+        /* Capa Base */
+
+        height: 100vh;
+        width: 100vw;
+        overflow-y: auto;
+        /* main es EL scroll */
+        scroll-timeline-name: --main-scroll;
+        scroll-timeline-axis: block;
+    }
+
+    /* LAYOUT 3: Hero */
+    /* Esta capa está siempre visible, pero con una máscara que le convierte en imagen.  */
+    .hero {
+        pointer-events: none;
+        height: var(--altura-seccion);
+        width: 100vw;
+        opacity: 1;
+        animation: zoomMask forwards linear;
+        animation-timeline: --main-scroll;
+
+        position: fixed;
+        top: var(--altura-navbar);
+        z-index: 1;
+
+        background: url(San\ Antonio.jpg);
+        background-size: 100% 120%;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        mask-image: url('data:image/svg+xml;utf8,<svg width="300" height="150" viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg"><polygon points="30,130 100,30 150,80 120,130" fill="white" stroke="white" stroke-width="3" stroke-linejoin="round"/><polygon points="150,80 200,30 270,130 180,130" fill="white" stroke="white" stroke-width="3" stroke-linejoin="round"/><line x1="30" y1="130" x2="120" y2="130" stroke="white" stroke-width="3"/><line x1="120" y1="130" x2="150" y2="80" stroke="white" stroke-width="3"/><line x1="180" y1="130" x2="270" y2="130" stroke="white" stroke-width="3"/><line x1="150" y1="80" x2="180" y2="130" stroke="white" stroke-width="3"/><rect x="144" y="105" width="6" height="6" rx="1" ry="1" fill="white"/><rect x="152" y="105" width="6" height="6" rx="1" ry="1" fill="white"/><rect x="144" y="113" width="6" height="6" rx="1" ry="1" fill="white"/><rect x="152" y="113" width="6" height="6" rx="1" ry="1" fill="white"/></svg>');
+        mask-repeat: no-repeat;
+        mask-size: 1000%;
+        mask-position: 30% center;
+    }
+
+    .hero a {
+        pointer-events: auto;
+        animation: disable-links linear forwards;
+        animation-timeline: --main-scroll;
+        animation-range: 0% 1%;
+    }
+
+    @keyframes disable-links {
+        to {
+            pointer-events: none;
+        }
+    }
+
+    /* Overlay blanco */
+    .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--gradiente-naranja);
+        animation: gradiente-naranja linear forwards;
+        animation-timeline: --main-scroll;
+        opacity: 0;
+    }
+
+    @keyframes gradiente-naranja {
+
+        0%,
+        20% {
+            opacity: 0;
+        }
+
+        30% {
+            opacity: 0.8;
+        }
+
+        50% {
+            opacity: 1;
+        }
+
+        60%,
+        100% {
+            opacity: 0;
+        }
+    }
+
+    /* Overlay blanco */
+    .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--gradiente-amarillo-tungsteno);
+        animation: gradiente-rosada linear forwards;
+        animation-timeline: --main-scroll;
+        opacity: 0;
+    }
+
+    @keyframes gradiente-rosada {
+
+        0%,
+        50% {
+            opacity: 0;
+        }
+
+        60%,
+        74% {
+            opacity: 1;
+        }
+
+        75%,
+        100% {
+            opacity: 0;
+        }
+    }
+
+
+
+    .hero>* {
+        animation: transparencia forwards linear;
+        animation-timeline: --main-scroll;
+        animation-range: 0% 9%;
+    }
+
+    .hero svg {
+        animation: transparencia forwards linear;
+        animation-timeline: --main-scroll;
+        animation-range: 0% 9%;
+    }
+
+    /* Animaciones */
+
+
+    @keyframes transparencia {
+        to {
+            opacity: 0;
+        }
+    }
+
+    @keyframes zoomMask {
+
+        0% {
+            mask-size: 1000%;
+            mask-position: 30% center;
+        }
+
+        10% {
+            mask-size: 500%;
+            mask-position: 30% center;
+        }
+
+        20% {
+            mask-size: 300%;
+            mask-position: 30% center;
+        }
+
+        30% {
+            mask-size: 35rem;
+            mask-position: center 0%;
+        }
+
+        40% {
+            mask-size: 27rem;
+            mask-position: center 15%;
+            opacity: 1;
+        }
+
+        75%,
+        100% {
+            mask-size: 25rem;
+            mask-position: center 15%;
+            opacity: 0;
+        }
+    }
+
+    @keyframes desaparecer {
+        to {
+            scale: 0.1;
+            opacity: 0;
+        }
+    }
+
+    /*COMPONENTE 1: TITULO */
+    .hero h1 {
+        padding-top: 3rem;
+
+        font-weight: 900;
+        text-transform: uppercase;
+        color: var(--color-blanco);
+        text-shadow: 3px 2px 3px rgba(0, 0, 0, .5);
+
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    /*COMPONENTE 2: CTAs */
+    .CTAs {
+        padding-top: 6rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.7rem;
+    }
+
+    .CTAs a {
+        width: 22rem;
+        display: block;
+        /* Los textos como span y a tienen display inline por defecto. Con block, lo bloqueamos a un ancho específico */
+        padding: 0.7rem;
+        border-radius: 5px;
+
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+
+    .CTAs .primary {
+        background: var(--color-primario);
+        color: var(--color-blanco);
+    }
+
+    .CTAs .secundary {
+        background: var(--color-secundario);
+        color: var(--color-submenu);
+    }
+
+    /*COMPONENTE 3: Flecha */
+    .flecha {
+        width: 5rem;
+        height: 5rem;
+        margin-top: 4rem;
+        opacity: 0.8;
+        z-index: 0;
+        /* A nivel base para que lo tape el menú si se activa */
+    }
+
+    /* LAYOUT 4: BRAND ANIMADO */
+    #brand-animado {
+        position: fixed;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        padding-top: 10rem;
+        z-index: 2;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        opacity: 0;
+        animation: animacion-brand linear forwards;
+        animation-timeline: --main-scroll;
+
+        mask-image: radial-gradient(circle,
+                white 0%,
+                white 30%,
+                transparent 65%);
+        mask-repeat: no-repeat;
+        mask-position: 50% 100%;
+        mask-size: 40% 40%;
+    }
+
+    @keyframes animacion-brand {
+
+        0%,
+        27% {
+            opacity: 0;
+        }
+
+        28% {
+            opacity: 1;
+            mask-size: 0% 0%;
+            scale: 1;
+        }
+
+        40%,
+        65% {
+            mask-size: 175% 175%;
+            opacity: 1;
+        }
+
+        75%,
+        100% {
+            mask-size: 0% 0%;
+            opacity: 1;
+            scale: 0.8;
+        }
+    }
+
+    #brand-animado span {
+        position: relative;
+        display: inline-block;
+        font-weight: 900;
+        text-transform: uppercase;
+        line-height: 1;
+        color: transparent;
+    }
+
+    #brand-animado span::before {
+        content: attr(data-text);
+        position: absolute;
+        inset: 0;
+
+        background: var(--gradiente-naranja);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        opacity: 0;
+        animation: gradiente-naranja linear forwards;
+        animation-timeline: --main-scroll;
+    }
+
+    #brand-animado span::after {
+        content: attr(data-text);
+        position: absolute;
+        inset: 0;
+
+        background: var(--gradiente-amarillo-tungsteno);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        opacity: 0;
+        animation: gradiente-rosada linear forwards;
+        animation-timeline: --main-scroll;
+    }
+
+    @keyframes brand-rosa {
+
+        0%,
+        50% {
+            opacity: 0;
+        }
+
+        51%,
+        74% {
+            opacity: 1;
+        }
+
+        75%,
+        100% {
+            opacity: 0;
+        }
+    }
+
+
+
+    #brand-animado .span1 {
+        font-size: 1.9rem
+    }
+
+    #brand-animado .span2 {
+        font-size: 3.5rem
+    }
+
+    #brand-animado .span3 {
+        font-size: 1rem
+    }
+
+    /* LAYOUT 5: DESTACADAS */
+    #destacadas {
+        pointer-events: none;
+        position: fixed;
+        top: 0;
+        left: 50;
+        height: 100vh;
+        width: 100vw;
+        padding: 1rem;
+
+        z-index: 1;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        color: linear-gradient(223.17deg, #c36267, #bd5f68 8.61%, #ae586a 17.21%, #9b4e69 25.82%, #874466 34.42%, #783d61 43.03%, #723a5f 51.63%);
+
+        font-weight: 900;
+        font-size: 1.5rem;
+        text-transform: uppercase;
+
+        opacity: 0;
+        animation: destacadas forwards linear;
+        animation-timeline: --main-scroll;
+    }
+
+    @keyframes destacadas {
+        0% {
+            opacity: 0;
+        }
+
+        75% {
+            opacity: 0;
+            scale: 0.1;
+        }
+
+        100% {
+            opacity: 1;
+            scale: 1;
+        }
+    }
+
+    #destacadas span {
+        display: block;
+        background: var(--gradiente-naranja);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    #scroll-space {
+        height: 300vh;
+        z-index: 0;
+    }
+
+    .hero,
+    #destacadas,
+    #brand-animado {
+        pointer-events: none;
+        /* Asegurar que no bloqueen el scroll */
+        touch-action: none;
+    }
+
+
+
+    /* COMPONENTE 1: TITULO */
+
+    /* VERSION DESKTOP */
+    @media (min-width: 834px) {
+
+        /* LAYOUT 1: MENU FIXED */
+
+        /* La marca crece con el dispositivo*/
+        .marca span {
+            font-size: 2vw;
+        }
+
+        /* El logo también crece con el dispositivo*/
+        .marca img {
+            widtH: 5vw;
+        }
+
+        /*Sin botón de menú */
+        .boton-menu {
+            display: none;
+        }
+
+        /* LAYOUT 2: MENU PRINCIPAL */
+
+        /* Menu integrado al menu-fixed */
+        #menu-principal {
+            width: 70vw;
+            height: var(--altura-navbar);
+
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 3;
+            /*Encima del navbar */
+
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+
+            background: transparent;
+            /* Necesario para que no choque con la versión móvil */
+        }
+
+        /* Links */
+        #menu-principal a {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Contenedor de los links */
+        #menu-principal ul {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding-right: 1rem;
+        }
+
+        /* Ancho de En Venta y En Arriendo */
+        #menu-principal ul li {
+            flex: 0.9;
+            text-align: center;
+        }
+
+        /* El link de Inicio es más pequeño */
+        #menu-principal ul li:first-child {
+            flex: 0.2;
+        }
+
+        /* El link de Contacto es un poco más grande */
+        #menu-principal ul li:last-child {
+            flex: 0.5;
+        }
+
+        /* El link de Administración de Propiedades es el más largo */
+        #menu-principal ul li:nth-last-child(2) {
+            flex: 1.15;
+        }
+
+        /* El main es scrolleable aún con el check activado */
+        #check-menu:checked~main {
+            overflow-y: auto;
+        }
+
+        #check-menu:checked~#menu-principal {
+            width: 70vw;
+            height: var(--altura-navbar);
+
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 3;
+            /*Encima del navbar */
+
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+
+            background: transparent;
+            /* Necesario para que no choque con la versión móvil */
+        }
+
+        /* LAYOUT 3: HERO */
+
+        /* COMPONENTE 1: TITULO */
+        .hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3rem);
+            font-weight: 900;
+            text-align: center;
+
+            flex-direction: row;
+            /* Span horizontales */
+            flex-wrap: wrap;
+            /* Separados en líneas aparte */
+            justify-content: center;
+            /* Agrupadas al centro */
+        }
+
+        .hero h1 .titutlo1 {
+            width: 100%;
+            display: block;
+            /* Ancho bloqueado de CORREDOR DE PROPIEDADES*/
+        }
+
+        .hero h1 .titutlo2,
+        .hero h1 .titutlo3 {
+            display: inline;
+            /*En la misma línea */
+        }
+
+        /*Espacio entre spans horizontales */
+        .hero h1 .titutlo2 {
+            margin-right: 0.4rem;
+        }
+    }
 </style>
-
+<input type="checkbox" id="check-menu">
 <header id="menu-fixed">
-	<div class="marca">
-		<img src="logo-chico.svg" aria-hidden="true">
-		<span>Dominguez y Pizarro</span>
-	</div>
-	<nav>
-		<ul>
-			<li><a href="#">Inicio</a></li>
-			<li>
-				<a href="#">Propiedades en venta</a>
-				<ul class="submenu">
-					<li><a href="#">Todas las propiedades en venta</a></li>
-					<li>
-						<a href="#">Filtrar por comunas</a>
-						<ul class="sub-submenu">
-							<li><a href="#">Santo Domingo</a></li>
-							<li><a href="#">San Antonio</a></li>
-							<li><a href="#">Cartagena</a></li>
-							<li><a href="#">El Tabo</a></li>
-							<li><a href="#">El Quisco</a></li>
-						</ul>
-					</li>
-					<li><a href="#">Casas en venta</a></li>
-					<li><a href="#">Departamentos en venta</a></li>
-					<li><a href="#">Parcelas en venta</a></li>
-				</ul>
-			</li>
-			<li>
-				<a href="#">Propiedades en arriendo</a>
-				<ul class="submenu">
-					<li><a href="#">Todas las propiedades en arriendo</a></li>
-					<li>
-						<span>Filtrar por comunas</span>
-						<ul class="sub-submenu">
-							<li><a href="#">Propiedades en Santo Domingo</a></li>
-							<li><a href="#">Propiedades en San Antonio</a></li>
-							<li><a href="#">Propiedades en Cartagena</a></li>
-							<li><a href="#">Propiedades en El Tabo</a></li>
-							<li><a href="#">Propiedades en El Quisco</a></li>
-						</ul>
-					</li>
-					<li><a href="#">Casas en venta</a></li>
-					<li><a href="#">Departamentos en venta</a></li>
-					<li><a href="#">Parcelas en venta</a></li>
-				</ul>
-			</li>
-			<li><a href="#">Administración de propiedades</a></li>
-			<li><a href="#">Contáctanos</a></li>
-		</ul>
-	</nav>
+    <div class="marca">
+        <img src="logo-chico.svg" aria-hidden="true">
+        <span>Dominguez y Pizarro</span>
+    </div>
+    <label class="boton-menu" for="check-menu" role="button" aria-controls="menu-principal"
+        aria-expanded="false"></label>
 </header>
+<nav id="menu-principal" aria-label="Navegación principal y buscador de propiedades">
+    <ul>
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#">Propiedades en venta</a></li>
+        <li><a href="#">Propiedades en arriendo</a></li>
+        <li><a href="#">Administración de propiedades</a></li>
+        <li><a href="#">Contáctanos</a></li>
+    </ul>
+</nav>
+<main>
+    <section id="animacion-principal">
+        <section class="hero">
+            <h1>
+                <span class="titutlo1">Corredor de Propiedades</span>
+                <span class="titutlo2">En San Antonio </span>
+                <span class="titutlo3">y Litoral Central</span>
+            </h1>
+            <ul class="CTAs">
+                <li><a href="#" class="primary">Ver propiedades en el Litoral Central</a></li>
+                <li><a href="#" class="secundary">Administración de propiedades</a></li>
+            </ul>
+            <a href="#">
+                <svg class="flecha" viewBox="0 0 24 24">
+                    <path d="M6 9l6 6 6-6" fill="none" stroke="white" stroke-width="2" />
+                </svg>
+            </a>
+        </section>
+        <section id="scroll-space">Scroll</section>
+        <section id="brand-animado" aria-hidden="true">
+            <span class="span1" data-text="Domínguez y Pizarro">Domínguez y Pizarro</span>
+            <span class="span2" data-text="Propiedades">Propiedades</span>
+            <span class="span3" data-text="Aumentamos su patrimonio y calidad de vida">Aumentamos su patrimonio
+                y calidad de vida</span>
+        </section>
+        <section id="destacadas">
+            <h2>
+                <span>Propiedades destacadas</span>
+                <span data-text="en San Antonio">en San Antonio</span>
+                <span data-text="y Litoral Central"> y Litoral Central</span>
+            </h2>
+        </section>
+    </section>
+</main>
