@@ -11,20 +11,6 @@
             --color-secundario: #faa307;
             --duracion-animacion: 4s;
             --gradiente-naranja: radial-gradient(circle at 50% -30vh, #ffd687 0, #fc5243 50vh, #9d2f6a 90vh, rgba(32, 31, 66, 0) 150vh);
-            --gradiente-rosada: radial-gradient(circle at 50% 40vh, #ffd27b 0, #df3a93 60vh, #5c1663 100vh);
-            --gradiente-amarillo-ampolleta: radial-gradient(circle at 50% 20%,
-                    #fff4c2 0%,
-                    #ffe08a 25%,
-                    #ffc857 45%,
-                    rgba(255, 200, 87, 0.4) 65%,
-                    rgba(255, 200, 87, 0) 80%);
-
-            --gradiente-amarillo-sodio: radial-gradient(circle at 50% 10%,
-                    #fff1b8 0%,
-                    #ffd166 30%,
-                    #ffb703 55%,
-                    rgba(255, 183, 3, 0.4) 75%,
-                    rgba(255, 183, 3, 0) 90%);
             --gradiente-amarillo-tungsteno: radial-gradient(circle at 50% 15%,
                     #ffb870 0%,
                     /* Empieza directamente con dorado */
@@ -32,19 +18,6 @@
                     #d68539 60%,
                     #c47833 100%);
             /* ← Mantiene el color sólido hasta el final */
-
-
-
-
-
-            --gradiente-1: radial-gradient(circle at 50% 145.586vh, rgb(255, 210, 123) 0vh, rgb(224, 59, 145) 50vh, rgb(94, 23, 99) 90vh, rgba(32, 31, 66, 0) 101.226vh);
-            --gradiente-2: radial-gradient(circle at 50% -30vh, #ffd687 0, #fc5243 50vh, #9d2f6a 90vh, rgba(32, 31, 66, 0) 150vh);
-            --gradiente-3: linear-gradient(223.17deg, #1c1829, #1b1828 8.61%, #191724 17.21%, #161520 25.82%, #14131c 34.42%, #121218 43.03%, #111117 51.63%);
-            --gradiente-4: linear-gradient(223.17deg, #237287, #246c84 8.61%, #265f7c 17.21%, #274f72 25.82%, #284367 34.42%, #283a5f 43.03%, #28375c 51.63%);
-            --gradiente-5: linear-gradient(223.17deg, #8c7bc8, #8a77c2 8.61%, #866db2 17.21%, #7e619f 25.82%, #75548b 34.42%, #6d4b7b 43.03%, #694775 51.63%);
-            --gradiente-6: linear-gradient(223.17deg, #c36267, #bd5f68 8.61%, #ae586a 17.21%, #9b4e69 25.82%, #874466 34.42%, #783d61 43.03%, #723a5f 51.63%);
-            --gradiente-7: linear-gradient(223.17deg, #545b75, #515872 8.61%, #4a526c 17.21%, #424964 25.82%, #3a415c 34.42%, #343b56 43.03%, #323953 51.63%);
-            --gradiente-8: linear-gradient(223.17deg, #515d47, #4e5b45 8.61%, #45563f 17.21%, #3a5039 25.82%, #324936 34.42%, #2e4435 43.03%, #2c4234 51.63%);
 
         }
 
@@ -102,14 +75,13 @@
 
         /*SUB-COMPONENTES */
         .marca span {
-            font-size: 1.6rem;
+            font-size: 0.9rem;
             font-weight: 700;
             text-transform: uppercase;
         }
 
         .marca img {
-            height: 100%;
-            width: auto;
+            width: 30%;
         }
 
         /* COMPONENTE 2: BOTON MENU */
@@ -218,7 +190,7 @@
 
             mask-image: url('data:image/svg+xml;utf8,<svg width="300" height="150" viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg"><polygon points="30,130 100,30 150,80 120,130" fill="white" stroke="white" stroke-width="3" stroke-linejoin="round"/><polygon points="150,80 200,30 270,130 180,130" fill="white" stroke="white" stroke-width="3" stroke-linejoin="round"/><line x1="30" y1="130" x2="120" y2="130" stroke="white" stroke-width="3"/><line x1="120" y1="130" x2="150" y2="80" stroke="white" stroke-width="3"/><line x1="180" y1="130" x2="270" y2="130" stroke="white" stroke-width="3"/><line x1="150" y1="80" x2="180" y2="130" stroke="white" stroke-width="3"/><rect x="144" y="105" width="6" height="6" rx="1" ry="1" fill="white"/><rect x="152" y="105" width="6" height="6" rx="1" ry="1" fill="white"/><rect x="144" y="113" width="6" height="6" rx="1" ry="1" fill="white"/><rect x="152" y="113" width="6" height="6" rx="1" ry="1" fill="white"/></svg>');
             mask-repeat: no-repeat;
-            mask-size: 1000%;
+            mask-size: 1200%;
             mask-position: 30% center;
         }
 
@@ -322,7 +294,7 @@
         @keyframes zoomMask {
 
             0% {
-                mask-size: 1000%;
+                mask-size: 1200%;
                 mask-position: 30% center;
             }
 
@@ -364,8 +336,8 @@
 
         /*COMPONENTE 1: TITULO */
         .hero h1 {
-            padding-top: 3rem;
-
+            padding-top: 7rem;
+            font-size: 1.5rem;
             font-weight: 900;
             text-transform: uppercase;
             color: var(--color-blanco);
@@ -378,7 +350,7 @@
 
         /*COMPONENTE 2: CTAs */
         .CTAs {
-            padding-top: 6rem;
+            padding-top: 10rem;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -530,15 +502,15 @@
 
 
         #brand-animado .span1 {
-            font-size: 1.9rem
+            font-size: 1.8rem
         }
 
         #brand-animado .span2 {
-            font-size: 3.5rem
+            font-size: 3.2rem
         }
 
         #brand-animado .span3 {
-            font-size: 1rem
+            font-size: 0.85rem
         }
 
         /* LAYOUT 5: DESTACADAS */
@@ -546,7 +518,7 @@
             pointer-events: none;
             position: fixed;
             top: 0;
-            left: 50;
+            left: 3%;
             height: 100vh;
             width: 100vw;
             padding: 1rem;
