@@ -19,6 +19,17 @@
                     #c47833 100%);
             /* ← Mantiene el color sólido hasta el final */
 
+            --gradiente-amarillo-vivo: radial-gradient(circle at 50% 15%,
+                    #ffd27d 0%,
+                    #f5b03c 45%,
+                    #c9822d 100%);
+
+            /* AMARILLO APAGADO (SALIDA) */
+            --gradiente-amarillo-apagado: radial-gradient(circle at 50% 15%,
+                    #d1b07c 0%,
+                    #b89563 45%,
+                    #8a6a3f 100%);
+
         }
 
         /* GENERAL */
@@ -237,7 +248,8 @@
                 opacity: 0.8;
             }
 
-            50% {
+            50%,
+            59% {
                 opacity: 1;
             }
 
@@ -252,10 +264,33 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: var(--gradiente-amarillo-tungsteno);
-            animation: gradiente-rosada linear forwards;
+            background: var(--gradiente-amarillo-vivo);
+            animation: gradiente-amarillo linear forwards;
             animation-timeline: --main-scroll;
             opacity: 0;
+        }
+
+        @keyframes gradiente-amarillo {
+
+            /* NO amarillo aún */
+            0%,
+            45% {
+                opacity: 0;
+            }
+
+            /* 🔥 CLÍMAX AMARILLO 🔥 */
+            50%,
+            60% {
+                opacity: 1;
+                background: var(--gradiente-amarillo-vivo);
+            }
+
+            /* SALIDA APAGADA */
+            70%,
+            100% {
+                opacity: 1;
+                background: var(--gradiente-amarillo-apagado);
+            }
         }
 
         @keyframes gradiente-rosada {
@@ -447,14 +482,15 @@
             }
 
             40%,
-            65% {
-                mask-size: 175% 175%;
+            70% {
+                mask-size: 100% 100%;
                 opacity: 1;
             }
 
-            75%,
+            /* Decadencia real */
+            85%,
             100% {
-                mask-size: 0% 0%;
+                mask-size: 25% 25%;
                 opacity: 1;
                 scale: 0.8;
             }
@@ -479,8 +515,25 @@
             -webkit-text-fill-color: transparent;
 
             opacity: 0;
-            animation: gradiente-naranja linear forwards;
+            animation: brand-naranja linear forwards;
             animation-timeline: --main-scroll;
+        }
+
+        @keyframes brand-naranja {
+
+            0%,
+            20% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            60%,
+            100% {
+                opacity: 0;
+            }
         }
 
         #brand-animado span::after {
@@ -488,14 +541,84 @@
             position: absolute;
             inset: 0;
 
-            background: var(--gradiente-amarillo-tungsteno);
+            background: var(--gradiente-amarillo-vivo);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
 
             opacity: 0;
-            animation: gradiente-rosada linear forwards;
+            animation: brand-amarillo linear forwards;
             animation-timeline: --main-scroll;
+        }
+
+        @keyframes brand-amarillo {
+
+            /* No amarillo */
+            0% {
+                opacity: 0;
+            }
+
+            /* 🔥 CLÍMAX 🔥 */
+            50%,
+            60% {
+                opacity: 1;
+                background: var(--gradiente-amarillo-vivo);
+            }
+
+            /* Amarillo apagado */
+            70%,
+            100% {
+                opacity: 1;
+                background: var(--gradiente-amarillo-apagado);
+            }
+        }
+
+        #brand-animado span::marker {
+            content: attr(data-text);
+            position: absolute;
+            inset: 0;
+
+            background: var(--gradiente-amarillo-apagado);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            opacity: 0;
+            animation: brand-amarillo-apagado linear forwards;
+            animation-timeline: --main-scroll;
+        }
+
+        @keyframes brand-amarillo {
+
+            0%,
+            49% {
+                opacity: 0;
+            }
+
+            /* 🔥 CLÍMAX */
+            50%,
+            60% {
+                opacity: 1;
+            }
+
+            /* Muere ANTES del colapso */
+            70%,
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes brand-amarillo-apagado {
+
+            0%,
+            59% {
+                opacity: 0;
+            }
+
+            70%,
+            100% {
+                opacity: 1;
+            }
         }
 
         @keyframes brand-rosa {
@@ -785,7 +908,7 @@
         </section>
         <section id="scroll-space">Scroll</section>
         <section id="brand-animado" aria-hidden="true">
-            <span class="span1" data-text="Domínguez y Pizarro">Domínguez y Pizarro</span>
+            <span class="span1" data-text="Dominguez y Pizarro">Dominguez y Pizarro</span>
             <span class="span2" data-text="Propiedades">Propiedades</span>
             <span class="span3" data-text="Aumentamos su patrimonio y calidad de vida">Aumentamos su patrimonio
                 y calidad de vida</span>
