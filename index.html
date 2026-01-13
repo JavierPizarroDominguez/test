@@ -183,11 +183,12 @@
             z-index: 1;
 
             background: url(San\ Antonio.jpg);
-            background-size: 100% 120%;
+            background-size: 100% 100%;
 
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: flex-end;
 
             mask-image: url('data:image/svg+xml;utf8,<svg width="300" height="150" viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg"><polygon points="30,130 100,30 150,80 120,130" fill="white" stroke="white" stroke-width="3" stroke-linejoin="round"/><polygon points="150,80 200,30 270,130 180,130" fill="white" stroke="white" stroke-width="3" stroke-linejoin="round"/><line x1="30" y1="130" x2="120" y2="130" stroke="white" stroke-width="3"/><line x1="120" y1="130" x2="150" y2="80" stroke="white" stroke-width="3"/><line x1="180" y1="130" x2="270" y2="130" stroke="white" stroke-width="3"/><line x1="150" y1="80" x2="180" y2="130" stroke="white" stroke-width="3"/><rect x="144" y="105" width="6" height="6" rx="1" ry="1" fill="white"/><rect x="152" y="105" width="6" height="6" rx="1" ry="1" fill="white"/><rect x="144" y="113" width="6" height="6" rx="1" ry="1" fill="white"/><rect x="152" y="113" width="6" height="6" rx="1" ry="1" fill="white"/></svg>');
             mask-repeat: no-repeat;
@@ -338,7 +339,7 @@
         /*COMPONENTE 1: TITULO */
         .hero h1 {
             padding-top: 7rem;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 900;
             text-transform: uppercase;
             color: var(--color-blanco);
@@ -359,7 +360,7 @@
         }
 
         .CTAs a {
-            width: 22rem;
+            width: 18rem;
             display: block;
             /* Los textos como span y a tienen display inline por defecto. Con block, lo bloqueamos a un ancho específico */
             padding: 0.7rem;
@@ -368,6 +369,10 @@
             text-align: center;
             text-transform: uppercase;
             font-weight: 600;
+        }
+
+        .CTAs a span {
+            display: block;
         }
 
         .CTAs .primary {
@@ -533,7 +538,7 @@
             color: linear-gradient(223.17deg, #c36267, #bd5f68 8.61%, #ae586a 17.21%, #9b4e69 25.82%, #874466 34.42%, #783d61 43.03%, #723a5f 51.63%);
 
             font-weight: 900;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             text-transform: uppercase;
 
             opacity: 0;
@@ -748,8 +753,18 @@
                 <span class="titutlo3">y Litoral Central</span>
             </h1>
             <ul class="CTAs">
-                <li><a href="#" class="primary">Ver propiedades en el Litoral Central</a></li>
-                <li><a href="#" class="secundary">Administración de propiedades</a></li>
+                <li>
+                    <a href="#" class="primary">
+                        <span>Ver propiedades</span>
+                        <span>en el Litoral Central</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="secundary">
+                        <span>Administración</span>
+                        <span>de propiedades</span>
+                    </a>
+                </li>
             </ul>
             <a href="#">
                 <svg class="flecha" viewBox="0 0 24 24">
