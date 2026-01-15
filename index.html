@@ -182,11 +182,10 @@
         /* LAYOUT 3: Hero */
         /* Esta capa está siempre visible, pero con una máscara que le convierte en imagen.  */
         .hero {
-            pointer-events: none;
             height: var(--altura-seccion);
             width: 100vw;
             opacity: 1;
-            animation: zoomMask forwards linear;
+            animation: hero-maska forwards linear;
             animation-timeline: --main-scroll;
 
             position: fixed;
@@ -200,10 +199,122 @@
             flex-direction: column;
             align-items: center;
 
-            mask-image: url('data:image/svg+xml;utf8,<svg width="300" height="150" viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg"><polygon points="30,130 100,30 150,80 120,130" fill="white" stroke="white" stroke-width="3" stroke-linejoin="round"/><polygon points="150,80 200,30 270,130 180,130" fill="white" stroke="white" stroke-width="3" stroke-linejoin="round"/><line x1="30" y1="130" x2="120" y2="130" stroke="white" stroke-width="3"/><line x1="120" y1="130" x2="150" y2="80" stroke="white" stroke-width="3"/><line x1="180" y1="130" x2="270" y2="130" stroke="white" stroke-width="3"/><line x1="150" y1="80" x2="180" y2="130" stroke="white" stroke-width="3"/><rect x="144" y="105" width="6" height="6" rx="1" ry="1" fill="white"/><rect x="152" y="105" width="6" height="6" rx="1" ry="1" fill="white"/><rect x="144" y="113" width="6" height="6" rx="1" ry="1" fill="white"/><rect x="152" y="113" width="6" height="6" rx="1" ry="1" fill="white"/></svg>');
-            mask-repeat: no-repeat;
-            mask-size: 1200%;
-            mask-position: 30% center;
+            mask-image: url('data:image/svg+xml;utf8,<svg width="300" height="150" viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg"><polygon points="30,130 100,30 150,80 120,130" fill="white" stroke="white" stroke-width="3" stroke-linejoin="round"/><polygon points="150,80 200,30 270,130 180,130" fill="white" stroke="white" stroke-width="3" stroke-linejoin="round"/><line x1="30" y1="130" x2="120" y2="130" stroke="white" stroke-width="3"/><line x1="120" y1="130" x2="150" y2="80" stroke="white" stroke-width="3"/><line x1="180" y1="130" x2="270" y2="130" stroke="white" stroke-width="3"/><line x1="150" y1="80" x2="180" y2="130" stroke="white" stroke-width="3"/><rect x="144" y="105" width="6" height="6" rx="1" ry="1" fill="white"/><rect x="152" y="105" width="6" height="6" rx="1" ry="1" fill="white"/><rect x="144" y="113" width="6" height="6" rx="1" ry="1" fill="white"/><rect x="152" y="113" width="6" height="6" rx="1" ry="1" fill="white"/></svg>'),
+                radial-gradient(circle, white 0%, white 20%, transparent 30%);
+            mask-size: 1200%, 1200%;
+            mask-position: 30% center, center;
+            mask-repeat: no-repeat, no-repeat;
+            mask-composite: intersect;
+        }
+
+        @keyframes hero-maska {
+
+            0% {
+                mask-size: 1300%, 1300%;
+                mask-position: 30% center, center;
+            }
+
+            10% {
+                mask-size: 500%, 1300%;
+                mask-position: 30% center, center;
+            }
+
+            20% {
+                mask-size: 300%, 1300%;
+                mask-position: 30% center, center;
+            }
+
+            25% {
+                mask-size: 95vw, 1300%;
+                mask-position: center 30%, center;
+            }
+
+            30% {
+                mask-size: 94vw, 100%;
+            }
+
+            40% {
+                mask-size: 93vw, 300%;
+                mask-position: center 30%, center;
+            }
+
+            70% {
+                opacity: 1;
+                mask-size: 85vw, 300%;
+            }
+
+            75%,
+            100% {
+                opacity: 0;
+                mask-size: 80vw, 100%;
+                mask-position: center 30%, center 100%;
+
+            }
+        }
+
+        /* Overlay blanco */
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: var(--color-navbar);
+            animation: color-branding linear forwards;
+            animation-timeline: --main-scroll;
+            opacity: 0;
+        }
+
+        @keyframes color-branding {
+
+            0%,
+            20% {
+                opacity: 0;
+                background-color: #10192d;
+            }
+
+            30% {
+                opacity: 0.8;
+            }
+
+
+            35% {
+                opacity: 0.9;
+                background-color: #10192d;
+            }
+
+            40% {
+                background-color: var(--color-primario);
+            }
+
+            60% {
+                background-color: var(--color-secundario);
+            }
+
+            75%,
+            100% {
+                mask-position: center 100%;
+                scale: 0.8;
+            }
+        }
+
+
+
+        .hero>* {
+            animation: transparencia forwards linear;
+            animation-timeline: --main-scroll;
+            animation-range: 0% 9%;
+        }
+
+        @keyframes transparencia {
+            to {
+                opacity: 0;
+            }
+        }
+
+        .hero svg {
+            animation: transparencia forwards linear;
+            animation-timeline: --main-scroll;
+            animation-range: 0% 9%;
+            opacity: 1;
         }
 
         .hero a {
@@ -216,158 +327,6 @@
         @keyframes disable-links {
             to {
                 pointer-events: none;
-            }
-        }
-
-        /* Overlay blanco */
-        .hero::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: var(--gradiente-naranja);
-            animation: gradiente-naranja linear forwards;
-            animation-timeline: --main-scroll;
-            opacity: 0;
-        }
-
-        @keyframes gradiente-naranja {
-
-            0%,
-            20% {
-                opacity: 0;
-            }
-
-            30% {
-                opacity: 0.8;
-            }
-
-            50%,
-            59% {
-                opacity: 1;
-            }
-
-            60%,
-            100% {
-                opacity: 0;
-            }
-        }
-
-        /* Overlay blanco */
-        .hero::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: var(--gradiente-amarillo-vivo);
-            animation: gradiente-amarillo linear forwards;
-            animation-timeline: --main-scroll;
-            opacity: 0;
-        }
-
-        @keyframes gradiente-amarillo {
-
-            /* NO amarillo aún */
-            0%,
-            45% {
-                opacity: 0;
-            }
-
-            /* 🔥 CLÍMAX AMARILLO 🔥 */
-            50%,
-            60% {
-                opacity: 1;
-                background: var(--gradiente-amarillo-vivo);
-            }
-
-            /* SALIDA APAGADA */
-            70%,
-            100% {
-                opacity: 1;
-                background: var(--gradiente-amarillo-apagado);
-            }
-        }
-
-        @keyframes gradiente-rosada {
-
-            0%,
-            50% {
-                opacity: 0;
-            }
-
-            60%,
-            74% {
-                opacity: 1;
-            }
-
-            75%,
-            100% {
-                opacity: 0;
-            }
-        }
-
-
-
-        .hero>* {
-            animation: transparencia forwards linear;
-            animation-timeline: --main-scroll;
-            animation-range: 0% 9%;
-        }
-
-        .hero svg {
-            animation: transparencia forwards linear;
-            animation-timeline: --main-scroll;
-            animation-range: 0% 9%;
-            opacity: 1;
-        }
-
-        /* Animaciones */
-
-
-        @keyframes transparencia {
-            to {
-                opacity: 0;
-            }
-        }
-
-        @keyframes zoomMask {
-
-            0% {
-                mask-size: 1300%;
-                mask-position: 30% center;
-            }
-
-            10% {
-                mask-size: 500%;
-                mask-position: 30% center;
-            }
-
-            20% {
-                mask-size: 300%;
-                mask-position: 30% center;
-            }
-
-            30% {
-                mask-size: 35rem;
-                mask-position: center 0%;
-            }
-
-            40% {
-                mask-size: 27rem;
-                mask-position: center 15%;
-                opacity: 1;
-            }
-
-            75%,
-            100% {
-                mask-size: 25rem;
-                mask-position: center 15%;
-                opacity: 0;
-            }
-        }
-
-        @keyframes desaparecer {
-            to {
-                scale: 0.1;
-                opacity: 0;
             }
         }
 
@@ -451,43 +410,35 @@
             align-items: center;
             justify-content: center;
 
-            opacity: 0;
+            opacity: 1;
             animation: animacion-brand linear forwards;
             animation-timeline: --main-scroll;
+            animation-range: 28% 75%;
 
-            mask-image: radial-gradient(circle,
-                    white 0%,
-                    white 30%,
-                    transparent 65%);
+            mask-image: radial-gradient(circle, white 0%, white 60%, transparent 70%);
+            mask-size: 100% 600%;
             mask-repeat: no-repeat;
-            mask-position: 50% 100%;
-            mask-size: 40% 40%;
+
         }
 
         @keyframes animacion-brand {
 
             0%,
-            27% {
-                opacity: 0;
+            15% {
+                color: #10192d;
             }
 
-            28% {
-                opacity: 1;
-                mask-size: 0% 0%;
-                scale: 1;
+            40% {
+                color: #e5532d;
             }
 
-            40%,
             70% {
-                mask-size: 100% 100%;
-                opacity: 1;
+                color: #faa307;
             }
 
-            /* Decadencia real */
-            85%,
-            100% {
-                mask-size: 25% 25%;
-                opacity: 1;
+            to {
+                mask-position: center 100%;
+                color: #faa307;
                 scale: 0.8;
             }
         }
@@ -498,141 +449,34 @@
             font-weight: 900;
             text-transform: uppercase;
             line-height: 1;
-            color: transparent;
         }
 
-        #brand-animado span::before {
-            content: attr(data-text);
-            position: absolute;
-            inset: 0;
-
-            background: var(--gradiente-naranja);
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-
-            opacity: 0;
-            animation: brand-naranja linear forwards;
-            animation-timeline: --main-scroll;
-        }
-
-        @keyframes brand-naranja {
-
-            0%,
-            20% {
-                opacity: 0;
-            }
-
-            50% {
-                opacity: 1;
-            }
-
-            60%,
-            100% {
-                opacity: 0;
-            }
-        }
-
+        /* Efecto de degradado (sin animacion)*/
         #brand-animado span::after {
             content: attr(data-text);
             position: absolute;
             inset: 0;
 
-            background: var(--gradiente-amarillo-vivo);
-            background-clip: text;
+            /* misma tipografía */
+            font: inherit;
+            line-height: inherit;
+
+            /* brillo degradado */
+            background:
+                radial-gradient(ellipse at bottom,
+                    rgba(200, 200, 200, 0.25),
+                    rgba(200, 200, 200, 0.2) 35%,
+                    rgba(200, 200, 200, 0.1) 70%,
+                    transparent 70%);
+
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-
-            opacity: 0;
-            animation: brand-amarillo linear forwards;
-            animation-timeline: --main-scroll;
-        }
-
-        @keyframes brand-amarillo {
-
-            /* No amarillo */
-            0% {
-                opacity: 1;
-            }
-
-            /* 🔥 CLÍMAX 🔥 */
-            50%,
-            60% {
-                opacity: 1;
-                background: var(--gradiente-amarillo-vivo);
-            }
-
-            /* Amarillo apagado */
-            70%,
-            100% {
-                opacity: 1;
-                background: var(--gradiente-amarillo-apagado);
-            }
-        }
-
-        #brand-animado span::marker {
-            content: attr(data-text);
-            position: absolute;
-            inset: 0;
-
-            background: var(--gradiente-amarillo-apagado);
             background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: transparent;
 
-            opacity: 0;
-            animation: brand-amarillo-apagado linear forwards;
-            animation-timeline: --main-scroll;
-        }
+            pointer-events: none;
 
-        @keyframes brand-amarillo {
-
-            0%,
-            49% {
-                opacity: 0;
-            }
-
-            /* 🔥 CLÍMAX */
-            50%,
-            60% {
-                opacity: 1;
-            }
-
-            /* Muere ANTES del colapso */
-            70%,
-            100% {
-                opacity: 0;
-            }
-        }
-
-        @keyframes brand-amarillo-apagado {
-
-            0%,
-            59% {
-                opacity: 0;
-            }
-
-            70%,
-            100% {
-                opacity: 1;
-            }
-        }
-
-        @keyframes brand-rosa {
-
-            0%,
-            50% {
-                opacity: 0;
-            }
-
-            51%,
-            74% {
-                opacity: 1;
-            }
-
-            75%,
-            100% {
-                opacity: 0;
-            }
+            /* hereda la máscara del reveal */
+            mask: inherit;
         }
 
 
@@ -665,8 +509,6 @@
             justify-content: center;
             align-items: center;
 
-            color: linear-gradient(223.17deg, #c36267, #bd5f68 8.61%, #ae586a 17.21%, #9b4e69 25.82%, #874466 34.42%, #783d61 43.03%, #723a5f 51.63%);
-
             font-weight: 900;
             font-size: 1.3rem;
             text-transform: uppercase;
@@ -674,23 +516,27 @@
             opacity: 0;
             animation: destacadas forwards linear;
             animation-timeline: --main-scroll;
+            animation-range: 75% 100%;
+
+            mask-image: radial-gradient(circle, white 0%, white 30%, transparent 40%);
+            mask-repeat: no-repeat;
+            mask-size: 100% 250%;
         }
 
         @keyframes destacadas {
-            0% {
+            from {
+                scale: 0.5;
                 opacity: 0;
             }
 
-            75% {
-                opacity: 0;
-                scale: 0.1;
-            }
-
-            100% {
-                opacity: 1;
+            to {
+                mask-size: 100% 100%;
                 scale: 1;
+                opacity: 1;
             }
         }
+
+
 
         #destacadas span {
             display: block;
