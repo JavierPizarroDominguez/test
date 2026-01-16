@@ -10,26 +10,6 @@
             --color-primario: #e5532d;
             --color-secundario: #faa307;
             --duracion-animacion: 4s;
-            --gradiente-naranja: radial-gradient(circle at 50% -30vh, #ffd687 0, #fc5243 50vh, #9d2f6a 90vh, rgba(32, 31, 66, 0) 150vh);
-            --gradiente-amarillo-tungsteno: radial-gradient(circle at 50% 15%,
-                    #ffb870 0%,
-                    /* Empieza directamente con dorado */
-                    #e89c45 30%,
-                    #d68539 60%,
-                    #c47833 100%);
-            /* ← Mantiene el color sólido hasta el final */
-
-            --gradiente-amarillo-vivo: radial-gradient(circle at 50% 15%,
-                    #ffd27d 0%,
-                    #f5b03c 45%,
-                    #c9822d 100%);
-
-            /* AMARILLO APAGADO (SALIDA) */
-            --gradiente-amarillo-apagado: radial-gradient(circle at 50% 15%,
-                    #d1b07c 0%,
-                    #b89563 45%,
-                    #8a6a3f 100%);
-
         }
 
         /* GENERAL */
@@ -50,7 +30,7 @@
         body {
             height: 100%;
             overflow: hidden;
-            /* body nunca scrollea */
+            /* body nunca scrollea (el main sí) */
         }
 
         ul {
@@ -138,7 +118,7 @@
             align-items: center;
 
             background: #0D1B2A;
-            width: 90%;
+            width: auto;
             padding: 2rem;
 
             position: fixed;
@@ -155,6 +135,12 @@
         #menu-principal ul li {
             margin-top: 1rem;
         }
+
+        #menu-principal ul li:first-child {
+            margin-top: 0;
+        }
+
+
 
         #menu-principal a {
             color: var(--color-blanco);
@@ -288,15 +274,10 @@
                 background-color: var(--color-primario);
             }
 
-            60% {
+            60%,
+            100% {
                 opacity: 0.9;
                 background-color: var(--color-secundario);
-            }
-
-            75%,
-            100% {
-                mask-position: center 100%;
-                scale: 0.8;
             }
         }
 
@@ -611,7 +592,6 @@
 
             #check-menu:checked~#menu-principal {
                 top: 3rem;
-                width: auto;
             }
 
 
@@ -632,32 +612,34 @@
                     mask-position: 30% center, center;
                 }
 
-                25% {
-                    mask-size: 35vw, 1300%;
-                    mask-position: center 0%, center;
-                }
-
                 30% {
-                    mask-size: clamp(20rem, 100vw, 21rem), 100%;
-                }
-
-                40% {
-                    mask-size: clamp(20rem, 100vw, 21rem), 300%;
-                    mask-position: center 0%, center;
+                    mask-size: 100vh, 100%;
+                    mask-position: center clamp(-1px, -30%, -30%), center;
                 }
 
                 70% {
                     opacity: 1;
-                    mask-size: clamp(20rem, 100vw, 21rem), 300%;
+                    mask-size: 71vh, 300%;
                 }
 
                 75%,
                 100% {
                     opacity: 0;
-                    mask-size: clamp(20rem, 100vw, 20rem), 100%;
-                    mask-position: center 0%, center 100%;
+                    mask-size: 75vh, 100%;
+                    mask-position: center 30%, center 100%;
 
                 }
+            }
+
+            #brand-animado {
+                padding-top: 0;
+                justify-content: flex-end;
+                padding-bottom: 15vh;
+            }
+
+            #destacadas {
+                mask-image: radial-gradient(white 0%, white 30%, transparent 60%);
+                mask-size: 100% 250%;
             }
         }
 
