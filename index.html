@@ -611,6 +611,7 @@
 
             #check-menu:checked~#menu-principal {
                 top: 3rem;
+                width: auto;
             }
 
 
@@ -632,28 +633,28 @@
                 }
 
                 25% {
-                    mask-size: 50vw, 1300%;
+                    mask-size: 35vw, 1300%;
                     mask-position: center 0%, center;
                 }
 
                 30% {
-                    mask-size: 49vw, 100%;
+                    mask-size: clamp(20rem, 100vw, 21rem), 100%;
                 }
 
                 40% {
-                    mask-size: 48vw, 300%;
+                    mask-size: clamp(20rem, 100vw, 21rem), 300%;
                     mask-position: center 0%, center;
                 }
 
                 70% {
                     opacity: 1;
-                    mask-size: 47vw, 300%;
+                    mask-size: clamp(20rem, 100vw, 21rem), 300%;
                 }
 
                 75%,
                 100% {
                     opacity: 0;
-                    mask-size: 46vw, 100%;
+                    mask-size: clamp(20rem, 100vw, 20rem), 100%;
                     mask-position: center 0%, center 100%;
 
                 }
