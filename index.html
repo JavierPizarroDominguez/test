@@ -608,10 +608,55 @@
             .hero h1 .titutlo2 {
                 margin-right: 0.4rem;
             }
+
+            @keyframes hero-maska {
+
+                0% {
+                    mask-size: 1300%, 1300%;
+                    mask-position: 30% center, center;
+                }
+
+                10% {
+                    mask-size: 500%, 1300%;
+                    mask-position: 30% center, center;
+                }
+
+                20% {
+                    mask-size: 300%, 1300%;
+                    mask-position: 30% center, center;
+                }
+
+                25% {
+                    mask-size: 60vw, 1300%;
+                    mask-position: center 0%, center;
+                }
+
+                30% {
+                    mask-size: 59vw, 100%;
+                }
+
+                40% {
+                    mask-size: 58vw, 300%;
+                    mask-position: center 0%, center;
+                }
+
+                70% {
+                    opacity: 1;
+                    mask-size: 57vw, 300%;
+                }
+
+                75%,
+                100% {
+                    opacity: 0;
+                    mask-size: 56vw, 100%;
+                    mask-position: center 0%, center 100%;
+
+                }
+            }
         }
 
         /* VERSION DESKTOP */
-        @media (min-width: 834px) {
+        @media (min-width: 950px) {
 
             /* LAYOUT 1: MENU FIXED */
 
