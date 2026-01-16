@@ -565,7 +565,50 @@
 
 
 
-        /* COMPONENTE 1: TITULO */
+        /* VERSION LANDSCAPE */
+        @media (orientation: landscape) and (max-height: 950px) {
+            #menu-fixed {
+                height: 3rem;
+            }
+
+            .CTAs {
+                flex-direction: row;
+            }
+
+            .hero {
+                top: 3rem;
+            }
+
+            .hero h1 {
+                font-size: 1.5rem;
+                font-weight: 900;
+                text-align: center;
+
+                flex-direction: row;
+                /* Span horizontales */
+                flex-wrap: wrap;
+                /* Separados en líneas aparte */
+                justify-content: center;
+                /* Agrupadas al centro */
+            }
+
+            .hero h1 .titutlo1 {
+                width: 100%;
+                display: block;
+                /* Ancho bloqueado de CORREDOR DE PROPIEDADES*/
+            }
+
+            .hero h1 .titutlo2,
+            .hero h1 .titutlo3 {
+                display: inline;
+                /*En la misma línea */
+            }
+
+            /*Espacio entre spans horizontales */
+            .hero h1 .titutlo2 {
+                margin-right: 0.4rem;
+            }
+        }
 
         /* VERSION DESKTOP */
         @media (min-width: 834px) {
