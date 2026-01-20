@@ -2,8 +2,15 @@
     <style>
         /* VARIABLES */
         :root {
-            --altura-navbar: 5rem;
-            --altura-seccion: calc(100vh - 5rem);
+            --altura-navbar: 13vh;
+            --altura-seccion: 87vh;
+
+            --font-size-marca: 4vw;
+            --ancho-logo-navbar: 20%;
+
+            --font-size-marca-landscape: 2vw;
+            --ancho-logo-navbar-landscape: 5%;
+
             --color-navbar: #10192d;
             --color-submenu: #0F0F1A;
             --color-blanco: #E9E9E9;
@@ -11,25 +18,6 @@
             --color-secundario: #faa307;
             --duracion-animacion: 4s;
             --gradiente-naranja: radial-gradient(circle at 50% -30vh, #ffd687 0, #fc5243 50vh, #9d2f6a 90vh, rgba(32, 31, 66, 0) 150vh);
-            --gradiente-amarillo-tungsteno: radial-gradient(circle at 50% 15%,
-                    #ffb870 0%,
-                    /* Empieza directamente con dorado */
-                    #e89c45 30%,
-                    #d68539 60%,
-                    #c47833 100%);
-            /* ← Mantiene el color sólido hasta el final */
-
-            --gradiente-amarillo-vivo: radial-gradient(circle at 50% 15%,
-                    #ffd27d 0%,
-                    #f5b03c 45%,
-                    #c9822d 100%);
-
-            /* AMARILLO APAGADO (SALIDA) */
-            --gradiente-amarillo-apagado: radial-gradient(circle at 50% 15%,
-                    #d1b07c 0%,
-                    #b89563 45%,
-                    #8a6a3f 100%);
-
         }
 
         /* GENERAL */
@@ -65,10 +53,9 @@
         #menu-fixed {
             width: 100%;
             height: var(--altura-navbar);
-            padding: 1rem 1rem 1rem 0.5rem;
             background-color: var(--color-navbar);
             color: var(--color-blanco);
-
+            padding: 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -80,19 +67,21 @@
 
         /* COMPONENTE 1: MARCA */
         .marca {
+            height: inherit;
             display: flex;
+            flex: 2;
             align-items: center;
         }
 
         /*SUB-COMPONENTES */
         .marca span {
-            font-size: 0.9rem;
+            font-size: var(--font-size-marca);
             font-weight: 700;
             text-transform: uppercase;
         }
 
         .marca img {
-            width: 20%;
+            width: var(--ancho-logo-navbar);
         }
 
         /* COMPONENTE 2: BOTON MENU */
@@ -101,7 +90,7 @@
             padding: 0.5rem;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 0.7rem;
+            font-size: 3vw;
             text-align: center;
         }
 
@@ -131,28 +120,26 @@
             display: none;
         }
 
+
+
         /* Al ser activado el check, muestra el menu principal */
         #check-menu:checked~#menu-principal {
             display: flex;
             flex-direction: column;
             align-items: center;
-
-            background: #0D1B2A;
-            width: 90%;
-            padding: 2rem;
-
             position: fixed;
-            top: 5rem;
-            /* Debajo del header */
+            top: var(--altura-navbar);
             right: 0;
             /* Alineado a la derecha */
             z-index: 3;
             /* Encima del menu-fixed */
+            background: #0D1B2A;
+            padding: 1rem;
             border-bottom-left-radius: 10px;
         }
 
         /* Distancia entre links */
-        #menu-principal ul li {
+        #menu-principal ul li:not(:first-child) {
             margin-top: 1rem;
         }
 
@@ -336,7 +323,7 @@
 
         /*COMPONENTE 1: TITULO */
         .hero h1 {
-            font-size: 1.3rem;
+            font-size: 6vw;
             font-weight: 900;
             text-transform: uppercase;
             color: var(--color-blanco);
@@ -360,7 +347,7 @@
         }
 
         .CTAs a {
-            width: 15rem;
+            width: 60vw;
             display: block;
             /* Los textos como span y a tienen display inline por defecto. Con block, lo bloqueamos a un ancho específico */
             padding: 0.7rem;
@@ -369,7 +356,7 @@
             text-align: center;
             text-transform: uppercase;
             font-weight: 600;
-            font-size: 0.7rem;
+            font-size: 4vw;
         }
 
         .CTAs a span {
@@ -563,105 +550,6 @@
             touch-action: none;
         }
 
-
-
-        /* VERSION LANDSCAPE */
-        @media (orientation: landscape) and (max-height: 950px) {
-            #menu-fixed {
-                height: 3rem;
-            }
-
-            .CTAs {
-                flex-direction: row;
-            }
-
-            .hero {
-                top: 3rem;
-            }
-
-            .hero h1 {
-                font-size: 1.5rem;
-                font-weight: 900;
-                text-align: center;
-
-                flex-direction: row;
-                /* Span horizontales */
-                flex-wrap: wrap;
-                /* Separados en líneas aparte */
-                justify-content: center;
-                /* Agrupadas al centro */
-            }
-
-            .hero h1 .titutlo1 {
-                width: 100%;
-                display: block;
-                /* Ancho bloqueado de CORREDOR DE PROPIEDADES*/
-            }
-
-            .hero h1 .titutlo2,
-            .hero h1 .titutlo3 {
-                display: inline;
-                /*En la misma línea */
-            }
-
-            /*Espacio entre spans horizontales */
-            .hero h1 .titutlo2 {
-                margin-right: 0.4rem;
-            }
-
-            #check-menu:checked~#menu-principal {
-                top: 3rem;
-                width: auto;
-            }
-
-
-            @keyframes hero-maska {
-
-                0% {
-                    mask-size: 1300%, 1300%;
-                    mask-position: 30% center, center;
-                }
-
-                10% {
-                    mask-size: 500%, 1300%;
-                    mask-position: 30% center, center;
-                }
-
-                20% {
-                    mask-size: 300%, 1300%;
-                    mask-position: 30% center, center;
-                }
-
-                25% {
-                    mask-size: 35vw, 1300%;
-                    mask-position: center 0%, center;
-                }
-
-                30% {
-                    mask-size: clamp(20rem, 100vw, 21rem), 100%;
-                }
-
-                40% {
-                    mask-size: clamp(20rem, 100vw, 21rem), 300%;
-                    mask-position: center 0%, center;
-                }
-
-                70% {
-                    opacity: 1;
-                    mask-size: clamp(20rem, 100vw, 21rem), 300%;
-                }
-
-                75%,
-                100% {
-                    opacity: 0;
-                    mask-size: clamp(20rem, 100vw, 20rem), 100%;
-                    mask-position: center 0%, center 100%;
-
-                }
-            }
-        }
-
-        /* VERSION DESKTOP */
         @media (min-width: 950px) {
 
             /* LAYOUT 1: MENU FIXED */
@@ -687,6 +575,7 @@
             #menu-principal {
                 width: 70vw;
                 height: var(--altura-navbar);
+                padding: 1rem;
 
                 position: fixed;
                 top: 0;
@@ -715,6 +604,7 @@
                 height: 100%;
                 display: flex;
                 align-items: center;
+                justify-content: center;
                 gap: 0.5rem;
                 padding-right: 1rem;
             }
@@ -723,11 +613,27 @@
             #menu-principal ul li {
                 flex: 0.9;
                 text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            #menu-principal ul li a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                height: 100%;
+                line-height: 1;
             }
 
             /* El link de Inicio es más pequeño */
             #menu-principal ul li:first-child {
                 flex: 0.2;
+            }
+
+            #menu-principal ul li:first-child a {
+                transform: translateY(0.4rem);
             }
 
             /* El link de Contacto es un poco más grande */
@@ -763,22 +669,41 @@
                 background: transparent;
                 /* Necesario para que no choque con la versión móvil */
             }
+        }
 
-            /* LAYOUT 3: HERO */
+        @media (orientation: landscape) {
+            .marca span {
+                font-size: var(--font-size-marca-landscape);
+            }
+
+            .marca img {
+                width: var(--ancho-logo-navbar-landscape);
+            }
+
+            /* COMPONENTE 2: BOTON MENU */
+            #menu-fixed .boton-menu {
+                font-size: 1.5vw;
+            }
 
             /* COMPONENTE 1: TITULO */
             .hero h1 {
-                font-size: clamp(2.2rem, 5vw, 3rem);
+                font-size: 4vw;
                 font-weight: 900;
                 text-align: center;
-
                 flex-direction: row;
                 /* Span horizontales */
                 flex-wrap: wrap;
                 /* Separados en líneas aparte */
                 justify-content: center;
                 /* Agrupadas al centro */
+                align-content: center;
+                /* Alineación vertical del contenido envuelto */
+                gap: 0;
+                /* Sin espacio entre líneas */
+                line-height: 1.1;
+                /* Controla el espacio entre líneas */
             }
+
 
             .hero h1 .titutlo1 {
                 width: 100%;
@@ -796,6 +721,18 @@
             .hero h1 .titutlo2 {
                 margin-right: 0.4rem;
             }
+
+            .CTAs {
+                flex-direction: row;
+            }
+
+            .CTAs a {
+                font-size: 1.4vw;
+                width: 30vw;
+            }
+
+
+
         }
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
