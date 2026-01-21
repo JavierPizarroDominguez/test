@@ -743,43 +743,53 @@
                 font-size: 3.4vh;
             }
 
-            #animacion-principal {
-                width: 100%;
-                height: var(--altura-seccion);
-                position: fixed;
-                z-index: 1;
-                top: 0;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                gap: 0;
-                background: #0F0F1A;
+            @keyframes hero-maska {
+
+                0% {
+                    mask-size: 1300%, 1300%;
+                    mask-position: 30% center, center;
+                }
+
+                10% {
+                    mask-size: 500%, 1300%;
+                    mask-position: 30% center, center;
+                }
+
+                20% {
+                    mask-size: 300%, 1300%;
+                    mask-position: 30% center, center;
+                }
+
+                25% {
+                    mask-size: 50vw, 1300%;
+                    mask-position: center 30%, center;
+                }
+
+                30% {
+                    mask-size: 40vw, 100%;
+                }
+
+                40% {
+                    mask-size: 40vw, 300%;
+                    mask-position: center 30%, center;
+                    top: 0;
+                }
+
+                70% {
+                    opacity: 1;
+                    mask-size: 20vw, 300%;
+                }
+
+                75%,
+                100% {
+                    opacity: 0;
+                    mask-size: 10vw, 100%;
+                    mask-position: center 30%, center 100%;
+
+                }
             }
 
-            .hero {
-                position: static;
-                mask-size: cover, 1300%;
-                mask-position: center, center;
-                animation: none;
-                height: 40vh;
-                width: 50vw;
-                margin-top: 20vh;
-            }
 
-            #brand-animado {
-                position: static;
-                opacity: 1;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                line-height: 1;
-                padding-top: 0;
-                mask-image: none;
-                height: auto;
-                width: auto;
-            }
         }
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -803,6 +813,7 @@
     </ul>
 </nav>
 <main>
+    <section id="scroll-space">Scroll</section>
     <section id="animacion-principal">
         <section class="hero">
             <h1>
@@ -844,5 +855,4 @@
             </h2>
         </section>
     </section>
-    <section id="scroll-space">Scroll</section>
 </main>
