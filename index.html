@@ -743,51 +743,6 @@
                 font-size: 3.4vh;
             }
 
-            @keyframes hero-maska {
-
-                0% {
-                    mask-size: 1300%, 1300%;
-                    mask-position: 30% center, center;
-                }
-
-                10% {
-                    mask-size: 500%, 1300%;
-                    mask-position: 30% center, center;
-                }
-
-                20% {
-                    mask-size: 300%, 1300%;
-                    mask-position: 30% center, center;
-                }
-
-                25% {
-                    mask-size: 50vw, 1300%;
-                    mask-position: center 30%, center;
-                }
-
-                30% {
-                    mask-size: 40vw, 100%;
-                }
-
-                40% {
-                    mask-size: 40vw, 300%;
-                    mask-position: center 30%, center;
-                    top: 0;
-                }
-
-                70% {
-                    opacity: 1;
-                    mask-size: 20vw, 300%;
-                }
-
-                75%,
-                100% {
-                    opacity: 0;
-                    mask-size: 10vw, 100%;
-                    mask-position: center 30%, center 100%;
-                }
-            }
-
             #animacion-principal {
                 position: fixed;
                 top: 13vh;
@@ -801,22 +756,51 @@
                 justify-content: flex-start;
             }
 
-            .hero {
-                margin-top: 5vh;
-                position: static;
-                height: 30vh;
-                width: 90vh;
-            }
-
-            /* ANIMAR TAMAÑO DEL HERO PARA QUE CAIGA EL BRAND */
-
             #brand-animado {
                 position: static;
                 height: 20vh;
                 width: auto;
                 padding-top: 0;
-                mask-image: none;
             }
+
+            @keyframes hero-maska {
+
+                0% {
+                    position: fixed;
+                    mask-size: 1300%, 1300%;
+                    mask-position: 30% center, center;
+                    height: var(--altura-seccion);
+                    width: 100vw;
+                }
+
+                10% {
+                    mask-size: 200%, 1300%;
+                    mask-position: 30% center, center;
+                    height: var(--altura-seccion);
+                    width: 100vw;
+                }
+
+                20%,
+                100% {
+                    position: static;
+                    height: 30vh;
+                    width: 90vh;
+                    margin-top: 5vh;
+                    mask-size: cover, 1300%;
+                    mask-position: center, center;
+                }
+
+                70% {
+                    opacity: 1;
+                }
+
+                75%,
+                100% {
+                    opacity: 0;
+
+                }
+            }
+
 
         }
     </style>
