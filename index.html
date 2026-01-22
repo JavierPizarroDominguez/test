@@ -470,8 +470,6 @@
             mask: inherit;
         }
 
-
-
         #brand-animado .span1 {
             font-size: 1.6rem
         }
@@ -762,26 +760,70 @@
                 height: auto;
                 width: auto;
                 padding-top: 0;
+                animation: brand-landscape linear forwards;
+                animation-timeline: --main-scroll;
+                opacity: 0;
+                mask-image: none;
+            }
+
+            @keyframes brand-landscape {
+
+                0%,
+                39.9% {
+                    opacity: 0;
+                    color: #10192d;
+                }
+
+                40% {
+                    opacity: 1;
+                    color: #10192d;
+                }
+
+                55% {
+                    color: #e5532d;
+                }
+
+                70% {
+                    color: #faa307;
+                }
+
+                to {
+                    mask-position: center 100%;
+                    color: #faa307;
+                    scale: 0.8;
+                }
+
             }
 
             @keyframes hero-maska {
 
                 0% {
-                    position: fixed;
                     mask-size: 1300%, 1300%;
                     mask-position: 30% center, center;
+                    position: fixed;
                     height: var(--altura-seccion);
                     width: 100vw;
                 }
 
                 10% {
-                    mask-size: 200%, 1300%;
+                    mask-size: 500%, 1300%;
                     mask-position: 30% center, center;
+                }
+
+                20% {
+                    mask-size: 300%, 1300%;
+                    mask-position: 30% center, center;
+                }
+
+                39% {
+                    mask-size: 100%, 1300%;
+                    mask-position: 30% center, center;
+                    position: fixed;
                     height: var(--altura-seccion);
                     width: 100vw;
                 }
 
-                20%,
+                40%,
                 100% {
                     position: static;
                     height: 30vh;
