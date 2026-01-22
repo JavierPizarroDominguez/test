@@ -237,7 +237,6 @@
                 opacity: 0;
                 mask-size: 80vw, 100%;
                 mask-position: center 30%, center 100%;
-
             }
         }
 
@@ -266,17 +265,18 @@
             }
 
 
-            35% {
+            35%,
+            45% {
                 opacity: 0.9;
                 background-color: #10192d;
             }
 
-            40% {
+            50% {
                 opacity: 0.8;
                 background-color: var(--color-primario);
             }
 
-            60% {
+            65% {
                 opacity: 0.9;
                 background-color: var(--color-secundario);
             }
@@ -287,8 +287,6 @@
                 scale: 0.8;
             }
         }
-
-
 
         .hero>* {
             animation: transparencia forwards linear;
@@ -763,6 +761,7 @@
                 padding-top: 0;
                 animation: brand-landscape linear forwards;
                 animation-timeline: --main-scroll;
+                animation-range: 0% 100%;
                 opacity: 0;
                 mask-image: none;
             }
@@ -770,17 +769,18 @@
             @keyframes brand-landscape {
 
                 0%,
-                39.9% {
+                29.9% {
                     opacity: 0;
                     color: #10192d;
                 }
 
-                40% {
+                30%,
+                45% {
                     opacity: 1;
                     color: #10192d;
                 }
 
-                55% {
+                50% {
                     color: #e5532d;
                 }
 
@@ -817,11 +817,6 @@
                 }
 
                 20% {
-                    mask-size: 300%, 1300%;
-                    mask-position: 30% center, center;
-                }
-
-                39% {
                     mask-size: 100%, 1300%;
                     mask-position: 30% center, center;
                     position: fixed;
@@ -829,7 +824,7 @@
                     width: 100vw;
                 }
 
-                40%,
+                30%,
                 100% {
                     position: static;
                     height: 30vh;
