@@ -1,5 +1,14 @@
 <head>
     <style>
+        /* 
+        Z-INDEX:
+        0 = MAIN
+        1 = ANIMACION
+        2 = HERO
+        3 = MENU-FIXED
+        4 = MENU-PRINCIPAL
+        */
+
         /* VARIABLES */
         :root {
             --altura-navbar: 13vh;
@@ -10,6 +19,8 @@
 
             --font-size-marca-landscape: 2vw;
             --ancho-logo-navbar-landscape: 5%;
+
+            --font-size-cta: 3vw;
 
             --color-navbar: #10192d;
             --color-submenu: #0F0F1A;
@@ -61,8 +72,7 @@
             align-items: center;
 
             position: fixed;
-            z-index: 2;
-            /*Encima del Hero, Debajo del Menú */
+            z-index: 3;
         }
 
         /* COMPONENTE 1: MARCA */
@@ -131,7 +141,7 @@
             top: var(--altura-navbar);
             right: 0;
             /* Alineado a la derecha */
-            z-index: 3;
+            z-index: 4;
             /* Encima del menu-fixed */
             background: #0D1B2A;
             padding: 1rem;
@@ -157,8 +167,7 @@
             /* Deja el espacio del navbar antes de mostrar contenido */
             padding-top: var(--altura-navbar);
 
-            z-index: 10;
-            /* Capa Base */
+            z-index: 0;
 
             height: 100vh;
             width: 100vw;
@@ -166,6 +175,26 @@
             /* main es EL scroll */
             scroll-timeline-name: --main-scroll;
             scroll-timeline-axis: block;
+        }
+
+        #scroll-space {
+            height: 300vh;
+            z-index: 0;
+        }
+
+        #animacion-principal {
+            position: fixed;
+            z-index: 1;
+            top: var(--altura-navbar);
+            height: var(--altura-seccion);
+            width: 100vw;
+            pointer-events: none;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
         }
 
         /* LAYOUT 3: Hero */
@@ -179,7 +208,7 @@
 
             position: fixed;
             top: var(--altura-navbar);
-            z-index: 1;
+            z-index: 2;
 
             background: url(San\ Antonio.jpg);
             background-size: 100% 100%;
@@ -201,42 +230,50 @@
             0% {
                 mask-size: 1300%, 1300%;
                 mask-position: 30% center, center;
+                position: fixed;
+                height: var(--altura-seccion);
+                width: 100vw;
             }
 
             10% {
                 mask-size: 500%, 1300%;
-                mask-position: 30% center, center;
+                mask-position: center center, center;
             }
 
             20% {
                 mask-size: 300%, 1300%;
-                mask-position: 30% center, center;
-            }
-
-            25% {
-                mask-size: 95vw, 1300%;
-                mask-position: center 30%, center;
+                mask-position: center center, center;
+                position: fixed;
+                height: var(--altura-seccion);
+                width: 100vw;
             }
 
             30% {
-                mask-size: 94vw, 100%;
+                position: static;
+                height: 30vw;
+                width: 90vw;
+                mask-position: center center, center;
+                mask-size: cover, 1300%;
             }
 
-            40% {
-                mask-size: 93vw, 300%;
-                mask-position: center 30%, center;
+            31% {
+                mask-size: cover, 100%;
             }
 
+            40%,
             70% {
+                mask-size: cover, 300%;
                 opacity: 1;
-                mask-size: 85vw, 300%;
             }
 
             75%,
             100% {
                 opacity: 0;
-                mask-size: 80vw, 100%;
-                mask-position: center 30%, center 100%;
+                position: static;
+                height: 30vw;
+                width: 90vw;
+                mask-size: cover, 100%;
+                mask-position: center center, center;
             }
         }
 
@@ -355,7 +392,7 @@
             text-align: center;
             text-transform: uppercase;
             font-weight: 600;
-            font-size: 4vw;
+            font-size: var(--font-size-cta);
         }
 
         .CTAs a span {
@@ -377,8 +414,8 @@
             width: 5rem;
             height: 5rem;
             opacity: 0.8;
-            z-index: 1;
-            /* A nivel base para que lo tape el menú si se activa */
+            z-index: 3;
+            /* ELIMINAR POSITION A AJUSTARLO CON EL FLEX PADRE */
             position: absolute;
             bottom: 15vh;
             left: 50%;
@@ -388,26 +425,61 @@
 
         /* LAYOUT 4: BRAND ANIMADO */
         #brand-animado {
-            position: fixed;
-            top: 0;
-            width: 100vw;
-            height: 100vh;
-            padding-top: 10rem;
-            z-index: 2;
+            width: auto;
+            height: auto;
 
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
 
-            opacity: 1;
-            animation: animacion-brand linear forwards;
+            opacity: 0;
+            animation: brand-landscape linear forwards;
             animation-timeline: --main-scroll;
-            animation-range: 28% 75%;
 
             mask-image: radial-gradient(circle, white 0%, white 60%, transparent 70%);
             mask-size: 100% 600%;
             mask-repeat: no-repeat;
+
+        }
+
+        @keyframes brand-landscape {
+
+            0%,
+            30.9% {
+                opacity: 0;
+                color: #10192d;
+            }
+
+            31% {
+                opacity: 1;
+                mask-position: center 0%;
+            }
+
+            45% {
+                color: #10192d;
+                mask-position: center 100%;
+            }
+
+            50% {
+                color: #e5532d;
+            }
+
+            70% {
+                color: #faa307;
+                opacity: 1;
+            }
+
+            75% {
+                opacity: 0;
+                mask-position: center 0%;
+            }
+
+            to {
+                color: #faa307;
+                scale: 0.8;
+                opacity: 0;
+            }
 
         }
 
@@ -491,7 +563,7 @@
             width: 100vw;
             padding: 1rem;
 
-            z-index: 1;
+            z-index: 2;
 
             display: flex;
             justify-content: center;
@@ -534,10 +606,7 @@
             color: transparent;
         }
 
-        #scroll-space {
-            height: 300vh;
-            z-index: 0;
-        }
+
 
         .hero,
         #destacadas,
@@ -577,7 +646,7 @@
                 position: fixed;
                 top: 0;
                 right: 0;
-                z-index: 3;
+                z-index: 4;
                 /*Encima del navbar */
 
                 display: flex;
@@ -655,7 +724,7 @@
                 position: fixed;
                 top: 0;
                 right: 0;
-                z-index: 3;
+                z-index: 4;
                 /*Encima del navbar */
 
                 display: flex;
@@ -680,6 +749,10 @@
             /* COMPONENTE 2: BOTON MENU */
             #menu-fixed .boton-menu {
                 font-size: 1.5vw;
+            }
+
+            #animacion-principal {
+                justify-content: flex-start;
             }
 
             /* COMPONENTE 1: TITULO */
@@ -740,19 +813,7 @@
                 font-size: 3.4vh;
             }
 
-            #animacion-principal {
-                position: fixed;
-                top: 13vh;
-                z-index: 2;
-                width: 100vw;
-                height: 87vh;
-                pointer-events: none;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: flex-start;
-                gap: 1rem;
-            }
+
 
             #brand-animado {
                 position: static;
@@ -762,27 +823,26 @@
                 animation: brand-landscape linear forwards;
                 animation-timeline: --main-scroll;
                 animation-range: 0% 100%;
-                opacity: 0;
+                opacity: 1;
+                mask-size: 100% 600%;
             }
 
             @keyframes brand-landscape {
 
                 0%,
-                29.9% {
+                30.9% {
                     opacity: 0;
                     color: #10192d;
-                    mask-size: 100% 600%;
                 }
 
                 31% {
                     opacity: 1;
-                    mask-size: 10% 10%;
-                    mask-position: center;
+                    mask-position: center 0%;
                 }
 
                 45% {
-                    mask-size: 100% 600%;
                     color: #10192d;
+                    mask-position: center 100%;
                 }
 
                 50% {
@@ -792,18 +852,17 @@
                 70% {
                     color: #faa307;
                     opacity: 1;
-                    mask-size: 100% 600%;
                 }
 
                 75% {
                     opacity: 0;
-                    mask-size: 10% 10%;
+                    mask-position: center 0%;
                 }
 
                 to {
-                    mask-position: center;
                     color: #faa307;
                     scale: 0.8;
+                    opacity: 0;
                 }
 
             }
@@ -862,8 +921,6 @@
 
                 }
             }
-
-
         }
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
